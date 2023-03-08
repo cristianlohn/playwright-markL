@@ -16,13 +16,13 @@ test('deve poder cadastrar uma nova tarefa clicando no botão adicionar', async 
     await deleteTaskByHelper(request, task.name)
 
     // E estou na página de cadastro
-    tasksPage.go()
+    await tasksPage.go()
 
     // Quando faço o cadastro dessa tarefa usando o botão
-    tasksPage.create(task)
+    await tasksPage.create(task)
 
     // Então essa tarefa deve ser exibida na lista
-    tasksPage.shouldHaveText(task.name)
+    await tasksPage.shouldHaveText(task.name)
 })
 
 //Validar criação de tarefas através da tecla enter
@@ -38,13 +38,13 @@ test('deve poder cadastrar uma nova tarefa teclando enter', async ({ page, reque
     await deleteTaskByHelper(request, task.name)
 
     // E estou na página de cadastro
-    tasksPage.go()
+    await tasksPage.go()
 
     // Quando faço o cadastro dessa tarefa usando a tecla enter
-    tasksPage.create(task)
+    await tasksPage.create(task)
 
     // Então essa tarefa deve ser exibida na lista
-    tasksPage.shouldToBeVisible(task.name)
+    await tasksPage.shouldToBeVisible(task.name)
 })
 
 //Validar tarefas duplicadas
@@ -64,11 +64,11 @@ test('não deve permitir tarefa duplicada', async ({ page, request }) => {
     await postTask(request, task)
 
     //E estou na página de cadastro
-    tasksPage.go()
+    await tasksPage.go()
 
     // Quando faço um novo cadastro com o mesmo nome de uma task existente
-    tasksPage.create(task)
+    await tasksPage.create(task)
 
     // Então devo receber um aviso de que não posso criar tarefas duplicadas
-    tasksPage.alertHaveText('Task already exists!')
+    await tasksPage.alertHaveText('Task already exists!')
 })
